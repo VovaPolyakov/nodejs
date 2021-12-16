@@ -18,8 +18,9 @@ app.engine('hbs', handlebars({
 }));
 app.use(express.static('public'));
 app.get('/', (req, res) => {
+    res.setHeader("Content-Type", "text/html");
     //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
-    res.render('main', { layout: 'index', });
+    res.render('main', { layout: 'index', something: "test" });
 
 
 });
