@@ -1,0 +1,19 @@
+
+h1{ 
+    text-align: center;
+}
+h2{
+    text-align: center;
+}
+
+
+li {
+    text-align: center;
+    font-size: 2rem;
+    width: 300px;
+    margin: 4px;
+    padding: 4px;
+    list-style: none
+};
+.midlaner {background-color: #eeeeee}
+.toplaner {background-color: #ffea00}
