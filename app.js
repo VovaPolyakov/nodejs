@@ -19,17 +19,17 @@ app.engine('hbs', handlebars({
 }));
 app.use(express.static('public'));
 app.get('/', (req, res) => {
-    res.setHeader("Content-Type", "text/html");
+    // res.setHeader("Content-Type", "text/html");
     //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
-    res.render('main', { layout: 'index', something: 'test' });
+    res.render('main');
 
 
 });
 app.post('/', urlencodedParser, function (req, res) {
-    res.setHeader("Content-Type", "text/html");
+    // res.setHeader("Content-Type", "text/html");
     if (!req.body) return res.sendStatus(400);
-    console.log(req.body)
-    res.render('planB.hbs', { root: path.join(__dirname, './views/layouts',) })
+    // console.log(req.body)
+    res.render('planB', { firstname: req.body.Firstname, });
 
 });
 app.listen(port, () => console.log(`App listening to port ${port}`));
