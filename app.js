@@ -5,11 +5,14 @@ const path = require('path');
 const port = 3000;
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const handlebars = require('express-handlebars');
-// //Sets our app to use the handlebars engine
 app.set('view engine', 'hbs');
 
-
-// //Sets handlebars configurations (we will go through them later on)
+const tickets = [
+    {country: 'Germany', time: 12},
+    {country: 'USA', time: 9},
+    {country: 'Russia', time: 13},
+    {country: 'Latvia', time: 17},
+];
 app.engine('hbs', handlebars({
     layoutsDir: `${__dirname}/views/layouts`,
     extname: 'hbs',
@@ -19,17 +22,23 @@ app.engine('hbs', handlebars({
 }));
 app.use(express.static('public'));
 app.get('/', (req, res) => {
-    // res.setHeader("Content-Type", "text/html");
-    //Serves the body of the page aka "main.handlebars" to the container //aka "index.handlebars"
     res.render('main');
 
 
 });
 app.post('/', urlencodedParser, function (req, res) {
-    // res.setHeader("Content-Type", "text/html");
     if (!req.body) return res.sendStatus(400);
-    // console.log(req.body)
-    res.render('planB', { firstname: req.body.Firstname, });
+    const adults = tickets.filter((item) =>{
+        if( req.body.where == item.country && req.body.time >= item.time){
+            return true
+        }
+        return false
+        
+    });
+    console.log(adults)
+    res.render('planB', { country: adults[0].country , time: adults[0].time,});
 
 });
+
+
 app.listen(port, () => console.log(`App listening to port ${port}`));
