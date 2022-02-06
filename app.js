@@ -35,8 +35,14 @@ app.post('/', urlencodedParser, function (req, res) {
         return false
         
     });
-    console.log(adults)
-    res.render('planB', { country: adults[0].country , time: adults[0].time,});
+    if (adults[0] === 1) {
+        console.log(adults)
+        res.render('planB', { country: adults[0].country , time: adults[0].time,});
+    }else{
+        console.log('Ошибка')
+        error = 'Ошибка'
+        res.render('planB', {error:error});
+    }
 
 });
 
